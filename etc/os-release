@@ -1,0 +1,13 @@
+PRETTY_NAME="Armbian 26.2.0 trixie"
+NAME="Armbian GNU/Linux"
+VERSION="26.2.0 (trixie)"
+VERSION_ID="26.2.0"
+VERSION_CODENAME=trixie
+ID=armbian
+ID_LIKE=debian
+HOME_URL="https://www.armbian.com"
+SUPPORT_URL="https://forum.armbian.com"
+BUG_REPORT_URL="https://github.com/armbian/build"
+PRIVACY_POLICY_URL="https://www.armbian.com"
+LOGO="armbian-logo"
+ARMBIAN_PRETTY_NAME="Armbian 26.2.0 trixie"

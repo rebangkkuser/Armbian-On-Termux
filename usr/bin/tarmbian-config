@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ "$EUID" -eq 0 ]; then
+  :
+else
+  echo "User is not root! Exit"
+  exit 1
+fi
+
+if [ -z "$1" ]; then
+	echo "tarmbian-config 1.0, by bangkkuser"
+	echo "This is the Termux Armbian project configuration utils."
+fi
+
+case "$1" in
+	--Xfce01)
+	 apt-get update
+	 apt-get install -y task-xfce-desktop --no-install-recommends
+	  ;;
+	--Xfce02)
+	 apt-get remove --purge -y task-xfce-desktop
+	  ;;
+	--GNOME01)
+	 apt install --no-install-recommends xorg gnome-core gnome-shell gnome-terminal -y
+	  ;;
+	--GNOME02)
+	 apt remove --purge -y gnome-core gnome-shell gnome-terminal
+	  ;;
+	--libsystemd)
+	 apt install -y libsystemd0
+	  ;;
+	--games)
+	 apt install -y supertux2
+	  ;;
+	--Xorg)
+	 apt install --no-install-recommends xorg xorg-server
+	  ;;
+	--addusr)
+	 echo "Setting up sudo...."
+	 apt install -y sudo >/dev/null 2>/dev/stdout
+	 echo "Creating a user."
+	 read -e -p "Select a user name: " uname
+	 useradd "${uname}"
+	 usermod -aG sudo "${uname}"
+	 echo "Select a password"
+	 passwd "${uname}"
+	 ;;
+esac
