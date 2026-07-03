@@ -1,0 +1,40 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+echo "Termux Armbian (or tarmbian) installer."
+echo "Version 26.5.1 (trixie)"
+echo "Mode: chroot"
+echo "If you want a verbose mode, use tarmbian-install-v"
+echo "https://github.com/rebangkkuser/Armbian-On-Termux"
+echo
+if [[ -f "$PREFIX"/bin/chroot-distro ]]; then
+	chroot-distro install debian --name tarmbian >/dev/null 2>&1
+else
+	echo "chroot-distro is not installed. Installing"
+	pip install chroot-distro >/dev/null 2>&1
+fi
+
+execcmd() {
+  chroot-distro login tarmbian -- "$@"
+}
+
+execcmd "apt update"
+
+execcmd "curl -fsSL https://raw.githubusercontent.com/rebangkkuser/Armbian-On-Termux/refs/heads/main/etc/os-release -o /etc/os-release"
+
+execcmd "curl -fsSL https://raw.githubusercontent.com/rebangkkuser/Armbian-On-Termux/refs/heads/main/usr/bin/tarmbian-config -o /usr/bin/tarmbian-config"
+
+execcmd "curl -fsSL https://raw.githubusercontent.com/rebangkkuser/Armbian-On-Termux/refs/heads/main/etc/profile.d/motd.sh -o /etc/profile.d/motd.sh"
+
+execcmd "wget https://apt.armbian.com/armbian.key -O /root/armbian.key"
+
+execcmd "gpg --dearmor < /root/armbian.key | tee /usr/share/keyrings/armbian-archive-keyring.gpg > /dev/null"
+echo "Finished installation."
+echo "Enter with"
+echo "chroot-distro login tarmbian"
+echo "or with shared X11"
+echo "chroot-distro login --shared-display tarmbian"
+echo "Install Xfce4"
+echo "tarmbian-config --Xfce01"
+echo "Remove Xfce4"
+echo "tarmbian-config --Xfce02"
+echo

@@ -1,0 +1,10 @@
+Package: tarmbian-chroot
+Version: 1.0
+Section: utils
+Priority: optional
+Architecture: all
+Maintainer: bangkkuser
+Depends: python3, sudo | tsu
+Description: A Termux util which allows you to create a chroot environment similar to ARMbian.
+Armbian's official site is: armbian.com
+
